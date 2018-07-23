@@ -13,8 +13,8 @@
 class Array1 {
 
     public static void Main(string[] args) {
-        int[] nums = { 1,2 };
-        int result = new Array1().SloveWithContinuousDeletion(nums);
+        int[] nums = { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 };
+        int result = new Array1().SloveWithReCreateArray(nums);
         Console.WriteLine(result);
     }
 
@@ -135,7 +135,31 @@ class Array1 {
         }
     }
 
+    /// <summary>
+    /// 方法四:
+    ///     利用一个变量Count,重构这个数组
+    /// </summary>
+    /// <param name="nums"></param>
+    public int SloveWithReCreateArray(int[] nums) {
+        if (nums.Length == 0) {
+            return 0;
+        } else if (nums.Length == 1) {
+            return 1;
+        }
+        int count = 0;
+        nums[count++] = nums[0];
+        for (int i=1;i<nums.Length;i++) {
+            if (nums[i] == nums[i - 1]) {
+                continue;
+            } else {
+                nums[count++] = nums[i];
+            }
+        }
+
+        return count;
+    }
+
     public int RemoveDuplicates(int[] nums) {
-        return SloveWithContinuousDeletion(nums);
+        return SloveWithReCreateArray(nums);
     }
 }
